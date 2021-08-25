@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +18,21 @@ export class RegisterComponent {
     name: ['Text 2', [Validators.required]],
   });
 
-  constructor(private fb: FormBuilder, private route: Router) { }
+  constructor(private fb: FormBuilder, private route: Router, private authService: AuthService) { }
 
   registro() {
-    this.route.navigateByUrl('/dashboard');
+
+    const { email, password, name } = this.miFormulario.value;
+
+    this.authService.registro(name, email, password)
+      .subscribe(ok => {
+        if (ok === true) {
+          this.route.navigateByUrl('/dashboard');
+        } else {
+          Swal.fire('Error', ok, 'error');
+        }
+      });
+
   }
 
 }
