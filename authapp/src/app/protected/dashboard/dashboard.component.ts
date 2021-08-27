@@ -7,9 +7,9 @@ import { AuthService } from '../../auth/services/auth.service';
   templateUrl: './dashboard.component.html',
   styles: [
     `
-      * {
-        margin: 15px;
-      }
+    .container {
+      margin: 10px;
+    }
     `
   ]
 })

@@ -18,7 +18,13 @@ export class LoginComponent {
     password: ['123456', [Validators.required, Validators.minLength(6)]],
   });
 
-  constructor(private fb: FormBuilder, private route: Router, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private route: Router, private authService: AuthService) {
+    const token = sessionStorage.getItem('token') || '';
+
+    if (token !== '') {
+      this.route.navigateByUrl('/dashboard');
+    }
+  }
 
   login() {
 
