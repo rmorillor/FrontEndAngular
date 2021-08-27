@@ -13,6 +13,7 @@ import { AgregarComponent } from './agregar/agregar.component';
 import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './heroe-tarjeta/heroe-tarjeta.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
+import { ConfirmarComponent } from './components/confirmar/confirmar.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ImagenPipe } from './pipes/imagen.pipe';
     DashboardComponent,
     ListadoComponent,
     HeroeTarjetaComponent,
-    ImagenPipe
+    ImagenPipe,
+    ConfirmarComponent
   ],
   imports: [
     CommonModule,
