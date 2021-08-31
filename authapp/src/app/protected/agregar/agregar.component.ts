@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Heroe, Publisher } from '../interfaces/heroes.interface';
+import { Heroe } from '../interfaces/heroes.interface';
 import { HeroesService } from '../services/heroes.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmarComponent } from '../components/confirmar/confirmar.component';
+import { PublicadoresService } from '../services/publicador.service';
+import { Publicador } from '../interfaces/publicador.interface';
 
 @Component({
   selector: 'app-agregar',
@@ -19,16 +21,7 @@ import { ConfirmarComponent } from '../components/confirmar/confirmar.component'
 })
 export class AgregarComponent implements OnInit {
 
-  publishers = [
-    {
-      id: 'DC Comics',
-      desc: 'DC - Comics'
-    },
-    {
-      id: 'Marvel Comics',
-      desc: 'Marvel - Comics'
-    }
-  ]
+  publishers: Publicador[] = [];
 
   heroe: Heroe = {
     id: '',
@@ -36,11 +29,12 @@ export class AgregarComponent implements OnInit {
     alter_ego: '',
     characters: '',
     first_appearance: '',
-    publisher: Publisher.DCComics,
+    publisher: '',
     alt_img: ''
   }
 
   constructor(private heroesService: HeroesService,
+    private publisherService: PublicadoresService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private _snackBar: MatSnackBar,
@@ -56,6 +50,9 @@ export class AgregarComponent implements OnInit {
         )
         .subscribe(heroe => this.heroe = heroe);
     }
+
+    this.publisherService.getPublishers().subscribe(({ publicador }) => this.publishers = publicador);
+
   }
 
   guardar() {
@@ -72,7 +69,7 @@ export class AgregarComponent implements OnInit {
 
     if (!this.heroe._id) {
 
-      if (this.heroe.publisher == Publisher.DCComics) {
+      if (this.heroe.publisher == 'DC Comics') {
 
         const index = this.heroe.superhero.indexOf(" ");
 
@@ -82,7 +79,7 @@ export class AgregarComponent implements OnInit {
           this.heroe.id = "dc-" + this.heroe.superhero.toLowerCase();
         }
 
-      } else {
+      } else if (this.heroe.publisher == 'Marvel Comics') {
 
         const index = this.heroe.superhero.indexOf(" ");
 
@@ -91,7 +88,11 @@ export class AgregarComponent implements OnInit {
         } else {
           this.heroe.id = "marvel-" + this.heroe.superhero.toLowerCase();
         }
+      } else {
+
+        this.heroe.id = this.heroe.publisher + '-' + this.heroe.superhero.toLowerCase();
       }
+
 
       this.heroesService.creartHeroe(this.heroe)
         .subscribe(heroe => {
