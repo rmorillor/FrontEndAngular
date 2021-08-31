@@ -14,6 +14,10 @@ import { MaterialModule } from '../material/material.module';
 import { HeroeTarjetaComponent } from './heroe-tarjeta/heroe-tarjeta.component';
 import { ImagenPipe } from './pipes/imagen.pipe';
 import { ConfirmarComponent } from './components/confirmar/confirmar.component';
+import { PublicadorComponent } from './publicador/publicador.component';
+import { AgregaPublicadorComponent } from './agrega-publicador/agrega-publicador.component';
+import { EditarPublicadorComponent } from './editar-publicador/editar-publicador.component';
+import { CustomMinDirective } from './directivas/custom-min.directive';
 
 
 @NgModule({
@@ -25,7 +29,11 @@ import { ConfirmarComponent } from './components/confirmar/confirmar.component';
     ListadoComponent,
     HeroeTarjetaComponent,
     ImagenPipe,
-    ConfirmarComponent
+    ConfirmarComponent,
+    PublicadorComponent,
+    AgregaPublicadorComponent,
+    EditarPublicadorComponent,
+    CustomMinDirective
   ],
   imports: [
     CommonModule,

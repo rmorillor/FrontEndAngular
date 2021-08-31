@@ -1,0 +1,65 @@
+<div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column">
+
+    <div fxFlex></div>
+    <form (ngSubmit)="guardar()" #agregarPublicador="ngForm" autocomplete="off" class="centrar" fxFlex="50"
+        fxLayout="column" fxFlex="auto">
+        <mat-card>
+
+            <mat-card-header>
+                <mat-card-title>Agregar Casa Publicadora</mat-card-title>
+                <br>
+            </mat-card-header>
+
+            <mat-card-content>
+
+                <!-- Campo codigo -->
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="100">
+                        <mat-label>Código</mat-label>
+                        <input matInput type="text" name="codigo" minlength="3" [ngModel]="initPublicador.codigo"
+                            required>
+                        <span class="texto_rojo" *ngIf="codigoValido()">El código debe contener mínimo 3
+                            letras</span>
+                    </mat-form-field>
+                </div>
+
+                <!-- Campo descripcion -->
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="100">
+                        <mat-label>Descripción</mat-label>
+                        <input matInput type="text" name="descripcion" [ngModel]="initPublicador.descripcion">
+                    </mat-form-field>
+                </div>
+
+                <!-- Campo publicaciones -->
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="100">
+                        <mat-label>Cant. Publicaciones</mat-label>
+                        <input matInput type="number" [ngModel]="initPublicador.cantidadpublicaciones" name="cantidadpublicaciones"
+                            [minimo]="0" customMin min="0">
+                    </mat-form-field>
+                </div>
+
+                <br>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <div fxLayout>
+                    <button mat-raised-button color="accent" type="submit" [disabled]="agregarPublicador.invalid">
+                        <mat-icon>note_add</mat-icon>
+                        Agregar
+                    </button>
+
+                    <span class="spacer"></span>
+
+                    <button mat-raised-button color="basic" [routerLink]="['/dashboard/publisher']">
+                        <mat-icon>cancel</mat-icon>
+                        Cancelar
+                    </button>
+                </div>
+            </mat-card-actions>
+
+        </mat-card>
+    </form>
+    <div fxFlex></div>
+</div>

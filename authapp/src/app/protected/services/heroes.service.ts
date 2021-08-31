@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { Heroes, Heroe, Publisher } from '../interfaces/heroes.interface';
+import { Heroes, Heroe } from '../interfaces/heroes.interface';
 import { map } from 'rxjs/operators';
 
 
