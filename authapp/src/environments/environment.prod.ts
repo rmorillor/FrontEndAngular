@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: 'http://localhost:4100/api'
+  baseURL: 'https://proyecto-roy-angular.herokuapp.com/api'
 };
